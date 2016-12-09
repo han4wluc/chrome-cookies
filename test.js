@@ -1,8 +1,14 @@
+
+
 document.getElementById("test").addEventListener('click', () => {
     console.log("Popup DOM fully loaded and parsed");
 
+
     function modifyDOM() {
         //You can play with your DOM here or check URL against your regex
+
+          localStorage.setItem("keyword", "Hello Kitty");
+
 
           console.log($('input#q'))
           $('input#q').val('Hello Kitty')
@@ -34,8 +40,6 @@ document.getElementById("test").addEventListener('click', () => {
         console.log(results[0]);
     });
 });
-
-
 
 
 
