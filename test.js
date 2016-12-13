@@ -1,35 +1,47 @@
+console.log("new pages");
 
-
-document.getElementById("test").addEventListener('click', () => {
+document.getElementById("test").addEventListener('click', function() {
     console.log("Popup DOM fully loaded and parsed");
 
 
     function modifyDOM() {
-        //You can play with your DOM here or check URL against your regex
 
-          localStorage.setItem("keyword", "Hello Kitty");
+      sessionStorage.setItem("doStartStep2", "yes");
+
+      //step 1 
+      $('input#q').val('Hello Kitty');
+      $('form[action*="/search"] [type=submit]').click();
+
+     
 
 
-          console.log($('input#q'))
-          $('input#q').val('Hello Kitty')
-          
-          // setTimeout(function(){
-          //    $('form[action*="/search"] [type=submit]').click()
-          // },2000)
+      }
 
-          $('form[action*="/search"] [type=submit]').click()
+       // setTimeout(function(){
+       //    w1.close();
+       //  }, 6000);
+      // var scrollDown = function(){
+      //   $('html,body').animate({ scrollTop: 500 }, 'slow');
+      // }
 
-          
+      // var openPageAndClose= function(){
+      //   var link = $('.item').find('.title a').attr('href');      
+      //   console.log("new page");
+  
+     
 
-          //scoll to the product position
-          setTimeout(function(){
-            $('html,body').animate({ scrollTop: 500 }, 'slow')
-            console.log("scoll to the product position")
-          },5000)
-       
-         
-   
-    }
+      // setTimeout(function(){
+      //   window.open($('.related-items').find('.desc a')[0].href);
+      // },2000); 
+
+      // console.log("button test");
+
+      // //scroll down,open product page and close  it
+      // sessionStorage.setItem("doStartAutomatioin","yes");
+      // scrollDown();
+      // setTimeout(openPageAndClose,2000);
+      
+    
 
     //We have permission to access the activeTab, so we can call chrome.tabs.executeScript:
     chrome.tabs.executeScript({
@@ -42,6 +54,43 @@ document.getElementById("test").addEventListener('click', () => {
 });
 
 
+
+    // localStorage.setItem("keyword", "Hello Kitty");         
+
+    //       setTimeout(function(){
+    //       $('input#q').val('Hello Kitty')
+    //       setTimeout(function(){
+    //         $('form[action*="/search"] [type=submit]').click()
+    //       },1000)
+    //       },1000)
+
+    //       //scoll to the product position  
+    //       setTimeout(function(){
+    //         $('html,body').animate({ scrollTop: 500 }, 'slow')
+    //         console.log("scoll to the poduct position")
+    //       },3000)
+
+    //       //click the first product 
+    //       setTimeout(function(){
+    //         var link = $('.item').find('.title a').attr('href')
+    //         link = link + "&close=true"
+
+    //         window.open(link, "_self");
+    //         console.log("click the first product")
+    //       },3000)
+
+  //    //click the first product 
+  // setTimeout(function(){
+  //   window.open($('.item').find('.title a').attr('href'),"_self");
+  //   console.log("click the first product")
+  // },6000)
+
+  
+  // //scroll to recommendation product
+  // setTimeout(function(){
+  //   $('html,body').animate({ scrollTop: 7000 }, 'slow')
+  //   console.log("scoll to the end of product position")
+  // },10000)
 
 // document.getElementById("test").addEventListener('click', () => {
 //   console.log("Popup DOM fully loaded and parsed");
