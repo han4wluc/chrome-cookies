@@ -1,48 +1,24 @@
 $( document ).ready(function() {
-  // var lastname = localStorage.getItem("keyword");
-  // console.log('ready', lastname);
-  // if(!lastname){
-  //   return;
-  // }
 
-  // localStorage.removeItem("keyword");
-  // if(!window.doStartAutomation){
-  //   return;
-  // }
-
-
-
-  //step 3 taobao
-  // if(window.doStartStep3 == 'yes'){
-
-  //   setTimeout(function(){
-  //     var scrollSpeed = $(document).height()/2; 
-  //     if($('.related-items').length){     
-  //         jQuery('html,body').animate({
-  //         scrollTop: jQuery('.related-items').offset().top-100}, scrollSpeed);
-  //     }else{
-  //       $('html, body').animate({
-  //         scrollTop: $(document).height()
-  //       }, scrollSpeed);
-  //     }
-  //     // window.close();
-  //   },5000)
-        
-  //   return
-  // }
-
-  var w1;
-
-  if(window.location.href.indexOf("https://item.taobao.com") >= 0){
-    window.opener.postMessage('requestStep3', 'https://s.taobao.com');
-  }
-
-  window.addEventListener('message', function(e){
-    if(e.data === 'requestStep3'){
-      w1.postMessage('doStep3', 'https://item.taobao.com')
+  chrome.storage.local.get('doStartAutomation',function(items){
+    // console.log('local.get', items.doStartAutomation)
+    if(!items.doStartAutomation){
+      return;
     }
-    if(e.data === 'doStep3'){
-      // step 3 taobao
+
+    // step 2
+    if(window.location.href.indexOf('https://s.taobao.com') >= 0){
+      console.log('doing step 2')
+      $('html,body').animate({ scrollTop: 500 }, 'slow');
+      setTimeout(function(){
+        var link = $('.item').find('.title a')[6].href;
+        window.open(link, '_self');
+      },2000)
+      return;
+    }
+
+    // step 3 taobao
+    if(window.location.href.indexOf("https://item.taobao.com") >= 0){
       console.log('doing step3')
       var scrollSpeed = $(document).height()/2; 
       if($('.related-items').length){     
@@ -53,42 +29,20 @@ $( document ).ready(function() {
           scrollTop: $(document).height()
         }, scrollSpeed);
       }
+      return;
     }
-  })
 
-  //step 3 tmall
-  if(window.location.href.indexOf("https://detail.tmall.com") >= 0){
-    console.log("tmall");
-    window.close();
-    return
-  }
-
-
-    //step 2
-  console.log("startstep2", sessionStorage.getItem('doStartStep2'))
-  if(sessionStorage.getItem('doStartStep2') == "yes"){
-
-    sessionStorage.removeItem('doStartStep2')
-    $('html,body').animate({ scrollTop: 500 }, 'slow');
-
-    setTimeout(function(){
-      var link = $('.item').find('.title a')[6].href;
-      w1 = window.open(link);
-
-      // setTimeout(function(){      
-      //   w1.postMessage('hello','https://item.taobao.com')
-      // },5000)
-      // w1.doStartStep3='yes';
-    },2000)
-  }
+    //step 3 tmall
+    if(window.location.href.indexOf("https://detail.tmall.com") >= 0){
+      console.log("doing step 3 tmall");
+      window.close();
+      return
+    }
 
 
- 
-  // w1.doStartAutomation=true;  
+  });
 
 
-      
-  // window.close(link);
  
 });
 

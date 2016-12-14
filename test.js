@@ -1,21 +1,22 @@
-console.log("new pages");
 
-document.getElementById("test").addEventListener('click', function() {
+document.getElementById("activate-automation").addEventListener('click', function() {
     console.log("Popup DOM fully loaded and parsed");
-
 
     function modifyDOM() {
 
-      sessionStorage.setItem("doStartStep2", "yes");
+      chrome.storage.local.set({
+        "doStartAutomation": true,
+      }, function(){
+        console.log('Storage successful 1')
+      });
 
-      //step 1 
+      // step 1 
+      console.log('doing step 1')
       $('input#q').val('Hello Kitty');
       $('form[action*="/search"] [type=submit]').click();
 
-     
 
-
-      }
+    }
 
        // setTimeout(function(){
        //    w1.close();
@@ -53,6 +54,25 @@ document.getElementById("test").addEventListener('click', function() {
     });
 });
 
+document.getElementById("stop-automation").addEventListener('click', function() {
+
+    var modifyDOM = function(){
+      chrome.storage.local.set({
+        "doStartAutomation": false,
+      }, function(){
+        console.log('Storage successful 2')
+      });
+    }
+
+    chrome.tabs.executeScript({
+        code: '(' + modifyDOM + ')();' //argument here is a string but function.toString() returns function's code
+    }, (results) => {
+        //Here we have just the innerHTML and not DOM structure
+        console.log('Popup script:')
+        console.log(results[0]);
+    });
+
+})
 
 
     // localStorage.setItem("keyword", "Hello Kitty");         
