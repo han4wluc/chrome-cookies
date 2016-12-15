@@ -5,7 +5,7 @@ var openItem = function(i){
 
 var doStep2 = function(){
   console.log('doing step 2')
-  var i=5;
+  var i=6;
   $('html,body').animate({
     scrollTop: $('#mainsrp-spucombo').offset().top + Math.ceil((i-3)/4)*345 
   }, 'slow');
@@ -17,6 +17,7 @@ var doStep2 = function(){
 }
 
 var scrollDown = function(){
+  console.log('scrollDown');
   var scrollSpeed = $(document).height()/2; 
   $('html, body').animate({
     scrollTop: jQuery('.footer-bd').offset().top
@@ -24,12 +25,13 @@ var scrollDown = function(){
 }
 
 var scrollToTop = function(){
+  console.log('scrollToTop');
   jQuery(window).scrollTop(jQuery("body").offset().top) 
 }
 
 var clickRecomItem = function(){
+  console.log('clickRecomItem');
   var scrollSpeed = $(document).height()/2; 
-  console.log('run case 1:recommendation items');    
   $('html,body').animate({
     scrollTop: $('.related-items').offset().top-100
   }, 2000);
@@ -39,7 +41,9 @@ var clickRecomItem = function(){
 }
 
 var searchAgain = function(){
+  console.log('searchAgain');
   setTimeout(function(){
+    scrollToTop();
     $('input.search-combobox-input').val('hello kitty');
   },3000);
 
@@ -70,21 +74,22 @@ $( document ).ready(function() {
         scrollDown();
       },2000); 
 
-      // if(Math.random() > 0.5){
-
-      setTimeout(function(){
-        console.log("No. of related-items：", $('.related-items').length);          
-        if($('.related-items').length){ 
-        //case 1 recommendation item
-          clickRecomItem();
-        }else{
-        //case 2 search again if no recommendation item
+      if(Math.random() > 0.5){
+        setTimeout(function(){
+          console.log("No. of related-items：", $('.related-items').length);          
+          if($('.related-items').length){ 
+          //case 1 recommendation item
+            clickRecomItem();
+          }else{
+          //case 2 search again if no recommendation item
+            searchAgain();
+          }
+        },12000); 
+      }else{
+        setTimeout(function(){
           searchAgain();
-        }
-      },12000); 
-      // }else{
-      //   researchAgain();
-      // }
+        },12000);
+      }
       return;
     }
 
