@@ -3,6 +3,10 @@ p{
   display:inline
 }
 
+.list{
+  width: 220px
+}
+
 input{
   display:inline,
 }

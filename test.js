@@ -51,7 +51,7 @@ document.getElementById("activate-automation").addEventListener('click', functio
 
     chrome.storage.local.set({
       "doStartAutomation": true,
-      "keywords": keyWords,
+      "keywords": keywords,
     }, function(){
       console.log('Storage successful 1')
     });
