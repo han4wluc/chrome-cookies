@@ -24,17 +24,27 @@ var openItem = function(i){
     window.open(link, '_self');  
 }
 
-var doStep2 = function(){
+var doStep2 = function(keyword){
   console.log('doing step 2')
   var i= Math.floor(35*Math.random()); //35
   console.log('product No.'+i);
-  $('html,body').animate({
-    scrollTop: $('#mainsrp-spucombo').offset().top + Math.ceil((i-3)/4)*345 
-  }, 'slow');
-  setTimeout(function(){
-    var link = $('.item').find('.title a')[i].href;
-    window.open(link, '_self');
-  },2000)
+  try {
+    $('html,body').animate({
+      scrollTop: $('#mainsrp-spucombo').offset().top + Math.ceil((i-3)/4)*345 
+    }, 'slow');
+    setTimeout(function(){
+      var link = $('.item').find('.title a')[i].href;
+      window.open(link, '_self');
+    },2000)
+  } catch (err){
+    setTimeout(function(){
+      var date = getDate();
+      var link = 'https://s.taobao.com/search?q='+encodeURI(keyword)+'&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_'+date+'&ie=utf8';
+      window.open(link, '_self');    
+    },2000)
+  }
+
+
   // setTimeout(openItem.bind(null,i), 2000)  
 }
 
@@ -128,7 +138,7 @@ $( document ).ready(function() {
 
     // step 2
     if(window.location.href.indexOf('https://s.taobao.com') >= 0){
-      doStep2();
+      doStep2(keyword);
       return;
     }
 
@@ -197,6 +207,11 @@ $( document ).ready(function() {
       return;
     }
 
+    if(window.location.href.indexOf("https://chaoshi.detail.tmall.com/item.htm") >= 0){
+      var date = getDate();
+      var link = 'https://s.taobao.com/search?q='+encodeURI(keyword)+'&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_'+date+'&ie=utf8';
+      window.open(link, '_self');      
+    }
 
   });
  
