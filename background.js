@@ -116,7 +116,7 @@ $( document ).ready(function() {
 
   chrome.storage.local.get(['keywords', 'doStartAutomation'],function(items){
     // console.log('local.get', items.doStartAutomation)
-    if(!items.doStartAutomation || !items.keywords){
+    if(!items.doStartAutomation){
       console.log('itesm', items)
       console.log('returned', items.doStartAutomation, items.keywords)
       return;
