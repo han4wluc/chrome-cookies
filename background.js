@@ -166,6 +166,11 @@ $( document ).ready(function() {
           searchAgain(keyword);
         },12000);
       }
+      setTimeout(function(){
+        var date = getDate();
+        var link = 'https://s.taobao.com/search?q='+encodeURI(keyword)+'&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_'+date+'&ie=utf8';
+        window.open(link, '_self');
+      },20000);
       return;
     }
 
@@ -202,7 +207,11 @@ $( document ).ready(function() {
 
 
 
-
+      setTimeout(function(){
+        var date = getDate();
+        var link = 'https://s.taobao.com/search?q='+encodeURI(keyword)+'&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_'+date+'&ie=utf8';
+        window.open(link, '_self');
+      },20000);
 
       return;
     }
