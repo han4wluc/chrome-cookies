@@ -207,10 +207,13 @@ $( document ).ready(function() {
       return;
     }
 
-    if(window.location.href.indexOf("https://chaoshi.detail.tmall.com/item.htm") >= 0){
-      var date = getDate();
-      var link = 'https://s.taobao.com/search?q='+encodeURI(keyword)+'&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_'+date+'&ie=utf8';
-      window.open(link, '_self');      
+    if(window.location.href.indexOf("taobao.com") >= 0 ||
+       window.location.href.indexOf("tmall.com") >= 0){
+      setTimeout(function(){
+        var date = getDate();
+        var link = 'https://s.taobao.com/search?q='+encodeURI(keyword)+'&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_'+date+'&ie=utf8';
+        window.open(link, '_self');      
+      },2000)
     }
 
   });
